@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
 	"id": "end-poem-narration",
-	"version": "${version}",
+	"version": "${mod_version}",
 	"name": "End Poem Narration",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "A Fabric mod that adds EnderStarr and HarrisonGray’s English human narration to the End Poem.",
 	"authors": [
 		"BrailleBennett"
 	],
@@ -21,9 +21,8 @@
 		"end-poem-narration.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.17.2",
-		"minecraft": "~1.21.8",
-		"java": ">=21",
-		"fabric-api": "*"
+		"fabricloader": ">=${fabric_loader_version}",
+		"minecraft": "~${minecraft_version}",
+		"java": ">=21"
 	}
 }

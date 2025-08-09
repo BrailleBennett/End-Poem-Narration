@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version "${loom_version}"
+    alias(libs.plugins.fabricLoom)
     id 'maven-publish'
 }
 
@@ -18,13 +18,15 @@ repositories {
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    minecraft libs.minecraft
     mappings loom.layered() {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.21.8:2025.07.20@zip")
+        parchment variantOf(libs.parchment) {
+            artifactType("zip")
+        }
     }
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-    modImplementation(include("net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"))
+
+    modImplementation libs.fabricLoader
 }
 
 loom {
@@ -37,7 +39,9 @@ processResources {
     inputs.property "version", project.version
 
     filesMatching("fabric.mod.json") {
-        expand "version": inputs.properties.version
+        expand "mod_version": inputs.properties.version,
+                fabric_loader_version: libs.fabricLoader.get().version,
+                minecraft_version: libs.minecraft.get().version
     }
 }
 

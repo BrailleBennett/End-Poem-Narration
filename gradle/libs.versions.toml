@@ -1,0 +1,11 @@
+# To manually find version numbers, use
+# https://linkie.shedaniel.dev/dependencies
+# https://parchmentmc.org/docs/getting-started for version table
+
+[libraries]
+fabricLoader = "net.fabricmc:fabric-loader:0.17.1"
+minecraft = "com.mojang:minecraft:1.21.8"
+parchment = "org.parchmentmc.data:parchment-1.21.8:2025.07.20"
+
+[plugins]
+fabricLoom = { id = "fabric-loom", version = "1.11-SNAPSHOT" }
