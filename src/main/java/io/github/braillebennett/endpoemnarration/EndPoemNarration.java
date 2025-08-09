@@ -14,11 +14,10 @@ public class EndPoemNarration implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     public static final ResourceLocation POEM_NARRATION = ResourceLocation.parse("end-poem-narration:poem-narration");
     public static SoundEvent POEM_NARRATION_SOUND_EVENT = SoundEvent.createVariableRangeEvent(POEM_NARRATION);
-    //public static final ResourceLocation POEM_NARRATION = new ResourceLocation(MOD_ID, "poem_narration"); // path
-    //public static final SoundEvent POEM_NARRATION_SOUND_EVENT = SoundEvent.createVariableRangeEvent(POEM_NARRATION);
 
     @Override
     public void onInitializeClient() {
+        LOGGER.info("Registering End Poem Narration sound.");
         Registry.register(BuiltInRegistries.SOUND_EVENT, EndPoemNarration.POEM_NARRATION, POEM_NARRATION_SOUND_EVENT);
     }
 }
