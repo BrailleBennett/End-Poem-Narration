@@ -23,7 +23,7 @@ public class WinScreenMixin {
         Minecraft client = Minecraft.getInstance();
         if (client.player.isLocalInstanceAuthoritative()) {
             musicVolume = client.options.getSoundSourceVolume(SoundSource.MUSIC);
-            if(musicVolume > 0.40) {
+            if (musicVolume > 0.40) {
                 client.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(0.40);
             }
             client.player.playNotifySound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);

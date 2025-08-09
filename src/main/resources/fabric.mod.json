@@ -1,28 +1,28 @@
 {
-	"schemaVersion": 1,
-	"id": "end-poem-narration",
-	"version": "${mod_version}",
-	"name": "End Poem Narration",
-	"description": "A Fabric mod that adds EnderStarr and HarrisonGray’s English human narration to the End Poem.",
-	"authors": [
-		"BrailleBennett"
-	],
-	"contact": {
-		"sources": "https://github.com/BrailleBennett/end-poem-narration"
-	},
-	"license": "GPL-3.0-only",
-	"environment": "client",
-	"entrypoints": {
-		"client": [
-			"io.github.braillebennett.endpoemnarration.EndPoemNarration"
-		]
-	},
-	"mixins": [
-		"end-poem-narration.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=${fabric_loader_version}",
-		"minecraft": "~${minecraft_version}",
-		"java": ">=21"
-	}
+  "schemaVersion": 1,
+  "id": "end-poem-narration",
+  "version": "${mod_version}",
+  "name": "End Poem Narration",
+  "description": "A Fabric mod that adds EnderStarr and HarrisonGray’s English human narration to the End Poem.",
+  "authors": [
+    "BrailleBennett"
+  ],
+  "contact": {
+    "sources": "https://github.com/BrailleBennett/end-poem-narration"
+  },
+  "license": "GPL-3.0-only",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "io.github.braillebennett.endpoemnarration.EndPoemNarration"
+    ]
+  },
+  "mixins": [
+    "end-poem-narration.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=21"
+  }
 }
