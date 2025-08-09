@@ -1,0 +1,7 @@
+{
+  poem-narration: {
+    "sounds": [
+      "end-poem-narration:poem-narration"
+    ]
+  }
+}

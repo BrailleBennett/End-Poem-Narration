@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "io.github.braillebennett.endpoemnarration.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+      "WinScreenMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
