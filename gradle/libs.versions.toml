@@ -3,6 +3,7 @@
 # https://parchmentmc.org/docs/getting-started for version table
 
 [libraries]
+fabricApi = "net.fabricmc.fabric-api:fabric-api:0.131.0+1.21.8"
 fabricLoader = "net.fabricmc:fabric-loader:0.17.1"
 lombok = "org.projectlombok:lombok:1.18.38"
 minecraft = "com.mojang:minecraft:1.21.8"

@@ -2,12 +2,11 @@ package io.github.braillebennett.endpoemnarration.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import io.github.braillebennett.endpoemnarration.EndPoemNarration;
+import lombok.extern.slf4j.Slf4j;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentContents;
-import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FormattedCharSequence;
 import org.spongepowered.asm.mixin.Final;
@@ -18,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.io.Reader;
 import java.util.List;
 
+@Slf4j
 @Mixin(WinScreen.class)
 public class WinScreenMixin {
     @Shadow
@@ -42,14 +41,15 @@ public class WinScreenMixin {
     @Unique
     private int poemLength;
 
-    @Inject(at = @At("HEAD"), method = "addPoemFile")
-    private void narratePoem(Reader reader, CallbackInfo ci) {
+    @Inject(at = @At("HEAD"), method = "init")
+    private void narratePoem(CallbackInfo ci) {
         Minecraft client = Minecraft.getInstance();
-        if (poem && client.player.isLocalInstanceAuthoritative()) {
+        if (poem) {
             savedMusicVolume = client.options.getSoundSourceVolume(SoundSource.MUSIC);
             if (savedMusicVolume > poemMusicVolume) {
                 client.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(poemMusicVolume);
             }
+            log.info("Playing the poem narration.");
             client.player.playNotifySound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);
         }
     }
@@ -88,7 +88,7 @@ public class WinScreenMixin {
 
     @Unique
     private void restoreMusicVolume() {
-        if(savedMusicVolume > poemMusicVolume) {
+        if (savedMusicVolume > poemMusicVolume) {
             Minecraft.getInstance().options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(savedMusicVolume);
         }
     }
