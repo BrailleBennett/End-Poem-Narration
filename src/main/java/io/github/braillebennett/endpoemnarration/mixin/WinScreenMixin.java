@@ -55,6 +55,8 @@ public class WinScreenMixin {
             log.info("Playing the poem narration.");
             client.player.playNotifySound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);
             hasPlayed = true;
+        } else if (hasPlayed && poem) {
+            log.error("The narration failed to start because it is already playing, or has already played this time.");
         }
     }
 
