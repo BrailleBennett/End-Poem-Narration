@@ -33,6 +33,9 @@ public class WinScreenMixin {
     private float scroll;
 
     @Unique
+    private boolean hasPlayed = false;
+
+    @Unique
     private double savedMusicVolume;
 
     @Unique
@@ -44,19 +47,20 @@ public class WinScreenMixin {
     @Inject(at = @At("HEAD"), method = "init")
     private void narratePoem(CallbackInfo ci) {
         Minecraft client = Minecraft.getInstance();
-        if (poem) {
+        if (!hasPlayed && poem) {
             savedMusicVolume = client.options.getSoundSourceVolume(SoundSource.MUSIC);
             if (savedMusicVolume > poemMusicVolume) {
                 client.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(poemMusicVolume);
             }
             log.info("Playing the poem narration.");
             client.player.playNotifySound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);
+            hasPlayed = true;
         }
     }
 
     @ModifyReturnValue(at = @At("RETURN"), method = "calculateScrollSpeed")
     private float lockScrollSpeed(float original) {
-        return inPoem() ? original : 0.5F;
+        return inPoem() ? 0.416F : original;
     }
 
     @Inject(at = @At("TAIL"), method = "tick")
@@ -68,6 +72,7 @@ public class WinScreenMixin {
 
     @Inject(at = @At("HEAD"), method = "respawn")
     private void forceRestoreMusicVolume(CallbackInfo ci) {
+        hasPlayed = false;
         restoreMusicVolume();
     }
 
