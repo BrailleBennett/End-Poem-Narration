@@ -27,6 +27,7 @@ dependencies {
     }
 
     modImplementation libs.fabricLoader
+    compileOnly libs.lombok
 }
 
 loom {
