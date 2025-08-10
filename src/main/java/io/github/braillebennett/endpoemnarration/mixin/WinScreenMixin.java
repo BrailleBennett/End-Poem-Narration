@@ -39,7 +39,7 @@ public class WinScreenMixin {
     private double savedMusicVolume;
 
     @Unique
-    private final double poemMusicVolume = 0.35;
+    private final double poemMusicVolume = 0.20;
 
     @Unique
     private int poemLength;
@@ -69,7 +69,7 @@ public class WinScreenMixin {
     }
 
     @Inject(at = @At("TAIL"), method = "tick")
-    private void restoreMusicVolumeAfterPoem(CallbackInfo ci) {
+    private void restoreMusicVolumeForCredits(CallbackInfo ci) {
         if (!inPoem()) {
             restoreMusicVolume();
         }
@@ -93,13 +93,16 @@ public class WinScreenMixin {
 
     @Unique
     private boolean inPoem() {
-        return poem && scroll <= poemLength;
+        int windowHeight = Minecraft.getInstance().getWindow().getHeight();
+        return poem && scroll <= poemLength + windowHeight;
     }
 
     @Unique
     private void restoreMusicVolume() {
         if (savedMusicVolume > poemMusicVolume) {
             Minecraft.getInstance().options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(savedMusicVolume);
+            log.info("Music volume was restored");
+            savedMusicVolume = 0.0;
         }
     }
 }
