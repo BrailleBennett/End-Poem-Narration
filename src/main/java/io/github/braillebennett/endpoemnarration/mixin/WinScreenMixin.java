@@ -4,27 +4,51 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import io.github.braillebennett.endpoemnarration.EndPoemNarration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.WinScreen;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentContents;
+import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FormattedCharSequence;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.Reader;
+import java.util.List;
 
 @Mixin(WinScreen.class)
 public class WinScreenMixin {
+    @Shadow
+    @Final
+    private boolean poem;
+
+    @Shadow
+    private List<FormattedCharSequence> lines;
+
+    @Shadow
+    private float scroll;
+
     @Unique
-    private double musicVolume;
+    private double savedMusicVolume;
+
+    @Unique
+    private final double poemMusicVolume = 0.35;
+
+    @Unique
+    private int poemLength;
 
     @Inject(at = @At("HEAD"), method = "addPoemFile")
     private void narratePoem(Reader reader, CallbackInfo ci) {
         Minecraft client = Minecraft.getInstance();
-        if (client.player.isLocalInstanceAuthoritative()) {
-            musicVolume = client.options.getSoundSourceVolume(SoundSource.MUSIC);
-            if (musicVolume > 0.40) {
-                client.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(0.40);
+        if (poem && client.player.isLocalInstanceAuthoritative()) {
+            savedMusicVolume = client.options.getSoundSourceVolume(SoundSource.MUSIC);
+            if (savedMusicVolume > poemMusicVolume) {
+                client.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(poemMusicVolume);
             }
             client.player.playNotifySound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);
         }
@@ -32,11 +56,40 @@ public class WinScreenMixin {
 
     @ModifyReturnValue(at = @At("RETURN"), method = "calculateScrollSpeed")
     private float lockScrollSpeed(float original) {
-        return 1f;
+        return inPoem() ? original : 0.5F;
+    }
+
+    @Inject(at = @At("TAIL"), method = "tick")
+    private void restoreMusicVolumeAfterPoem(CallbackInfo ci) {
+        if (!inPoem()) {
+            restoreMusicVolume();
+        }
     }
 
     @Inject(at = @At("HEAD"), method = "respawn")
-    private void resetMusicVolume(CallbackInfo ci) {
-        Minecraft.getInstance().options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(musicVolume);
+    private void forceRestoreMusicVolume(CallbackInfo ci) {
+        restoreMusicVolume();
+    }
+
+    @ModifyReturnValue(at = @At("RETURN"), method = "getNarrationMessage")
+    private Component suppressPoemTTS(Component original) {
+        return poem ? CommonComponents.EMPTY : original;
+    }
+
+    @Inject(at = @At("TAIL"), method = "addPoemLines")
+    private void capturePoemSize(String text, CallbackInfo ci) {
+        poemLength = lines.size();
+    }
+
+    @Unique
+    private boolean inPoem() {
+        return poem && scroll <= poemLength;
+    }
+
+    @Unique
+    private void restoreMusicVolume() {
+        if(savedMusicVolume > poemMusicVolume) {
+            Minecraft.getInstance().options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(savedMusicVolume);
+        }
     }
 }
