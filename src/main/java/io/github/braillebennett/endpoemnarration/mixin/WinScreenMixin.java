@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Slf4j
-@Mixin(WinScreen.class)
+@Mixin(value = WinScreen.class, priority = 999)
 public class WinScreenMixin {
     @Shadow
     @Final
