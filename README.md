@@ -9,6 +9,10 @@ the [Minecraft Access](https://github.com/Minecraft-Access/Minecraft-Access) mod
 but due to the size of the sound file, and the opportunity for non-visually impaired players to use the mod, it was
 split off into a companion mod which doesn't require Minecraft Access.
 
+## Download
+
+[Get it on Modrinth](https://modrinth.com/project/tLv7MNQC)
+
 ## Credits
 
 This mod uses a [remastered version](https://youtube.com/watch?v=fUInNvd9RKw)
