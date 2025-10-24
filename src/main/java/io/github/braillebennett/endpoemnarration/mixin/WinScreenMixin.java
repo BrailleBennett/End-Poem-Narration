@@ -21,7 +21,7 @@ import java.util.List;
 
 @Slf4j
 @Mixin(value = WinScreen.class, priority = 999)
-public class WinScreenMixin {
+abstract class WinScreenMixin {
     @Shadow
     @Final
     private boolean poem;
