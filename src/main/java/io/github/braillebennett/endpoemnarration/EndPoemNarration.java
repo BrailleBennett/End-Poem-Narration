@@ -4,13 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
 @Slf4j
 public class EndPoemNarration implements ClientModInitializer {
     public static final String MOD_ID = "end-poem-narration";
-    public static final ResourceLocation POEM_NARRATION = ResourceLocation.parse("end-poem-narration:poem-narration");
+    public static final Identifier POEM_NARRATION = Identifier.parse("end-poem-narration:poem-narration");
     public static SoundEvent POEM_NARRATION_SOUND_EVENT = SoundEvent.createVariableRangeEvent(POEM_NARRATION);
 
     @Override

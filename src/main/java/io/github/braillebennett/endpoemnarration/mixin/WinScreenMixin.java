@@ -53,7 +53,7 @@ abstract class WinScreenMixin {
                 client.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(poemMusicVolume);
             }
             log.info("Playing the poem narration.");
-            client.player.playNotifySound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);
+            client.level.playPlayerSound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);
             hasPlayed = true;
             if (client.options.getSoundSourceVolume(SoundSource.VOICE) < 0.60) {
                 log.warn("Your speech/voice sound source may be to quiet too properly hear the poem narration");
