@@ -87,7 +87,7 @@ abstract class WinScreenMixin {
     }
 
     @Inject(at = @At("TAIL"), method = "addPoemLines")
-    private void capturePoemSize(String text, CallbackInfo ci) {
+    private void capturePoemSize(String line, CallbackInfo ci) {
         poemLength = lines.size();
     }
 
