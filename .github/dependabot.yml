@@ -1,23 +1,20 @@
 version: 2
+
+multi-ecosystem-groups:
+  dependencies:
+    assignees:
+      - BrailleBennett
+    schedule:
+      interval: weekly
+      day: sunday
+
 updates:
   - package-ecosystem: github-actions
     directory: "/"
-    schedule:
-      interval: weekly
-      day: sunday
-    groups:
-      gh-actions:
-        update-types:
-          - minor
-          - patch
+    patterns: [ "*" ]
+    multi-ecosystem-group: dependencies
 
   - package-ecosystem: gradle
     directory: "/"
-    schedule:
-      interval: weekly
-      day: sunday
-    groups:
-      gradle-dependencies:
-        patterns:
-          # Use wildcard to bundle plugins and libs into one PR
-          - "*"
+    patterns: [ "*" ]
+    multi-ecosystem-group: dependencies
