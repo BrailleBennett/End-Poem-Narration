@@ -10,24 +10,11 @@ base {
     archivesName = project.archives_base_name
 }
 
-repositories {
-    maven {
-        name = 'ParchmentMC'
-        url = 'https://maven.parchmentmc.org'
-    }
-}
-
 dependencies {
     minecraft libs.minecraft
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment variantOf(libs.parchment) {
-            artifactType("zip")
-        }
-    }
 
-    modImplementation libs.fabricLoader
-    modImplementation libs.fabricApi
+    implementation libs.fabricLoader
+    implementation libs.fabricApi
     compileOnly libs.lombok
     annotationProcessor libs.lombok
 }
