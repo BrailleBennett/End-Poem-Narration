@@ -1,7 +1,7 @@
 {
-  "poem-narration": {
+  "poem_narration": {
     "sounds": [
-      "end_poem_narration:poem-narration"
+      "end_poem_narration:poem_narration"
     ]
   }
 }
