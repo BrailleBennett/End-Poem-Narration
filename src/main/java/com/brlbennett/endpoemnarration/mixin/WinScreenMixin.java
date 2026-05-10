@@ -1,7 +1,7 @@
-package io.github.braillebennett.endpoemnarration.mixin;
+package com.brlbennett.endpoemnarration.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import io.github.braillebennett.endpoemnarration.EndPoemNarration;
+import com.brlbennett.endpoemnarration.EndPoemNarration;
 import lombok.extern.slf4j.Slf4j;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.WinScreen;

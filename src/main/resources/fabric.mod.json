@@ -14,7 +14,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "io.github.braillebennett.endpoemnarration.EndPoemNarration"
+      "com.brlbennett.endpoemnarration.EndPoemNarration"
     ]
   },
   "mixins": [

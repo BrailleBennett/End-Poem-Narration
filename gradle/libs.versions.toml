@@ -3,10 +3,10 @@
 # https://parchmentmc.org/docs/getting-started for version table
 
 [libraries]
-fabricApi = "net.fabricmc.fabric-api:fabric-api:0.144.3+26.1"
-fabricLoader = "net.fabricmc:fabric-loader:0.18.5"
+fabricApi = "net.fabricmc.fabric-api:fabric-api:0.146.1+26.1.2"
+fabricLoader = "net.fabricmc:fabric-loader:0.19.2"
 lombok = "org.projectlombok:lombok:1.18.44"
-minecraft = "com.mojang:minecraft:26.1"
+minecraft = "com.mojang:minecraft:26.1.2"
 
 [plugins]
-fabricLoom = { id = "net.fabricmc.fabric-loom", version = "1.15-SNAPSHOT" }
+fabricLoom = { id = "net.fabricmc.fabric-loom", version = "1.16-SNAPSHOT" }

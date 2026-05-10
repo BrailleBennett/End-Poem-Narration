@@ -1,4 +1,4 @@
-package io.github.braillebennett.endpoemnarration;
+package com.brlbennett.endpoemnarration;
 
 import lombok.extern.slf4j.Slf4j;
 import net.fabricmc.api.ClientModInitializer;
