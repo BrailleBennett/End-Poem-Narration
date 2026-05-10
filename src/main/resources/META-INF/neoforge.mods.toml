@@ -4,7 +4,7 @@ issueTrackerURL = "https://github.com/BrailleBennett/end-poem-narration/issues/"
 license = "GPL-3.0-only"
 
 [[mods]]
-modId = "end-poem-narration"
+modId = "end_poem_narration"
 version = "${mod_version}"
 displayName = "End Poem Narration"
 authors = "BrailleBennett"
@@ -25,4 +25,4 @@ type = "required"
 versionRange = "${neoforge_minecraft_version_range}"
 
 [[mixins]]
-config = "end-poem-narration.mixins.json"
+config = "end_poem_narration.mixins.json"

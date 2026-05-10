@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 
 @Slf4j
 public class EndPoemNarration {
-    public static final String MOD_ID = "end-poem-narration";
+    public static final String MOD_ID = "end_poem_narration";
     public static final Identifier POEM_NARRATION = Identifier.parse(MOD_ID + ":poem-narration");
     public static SoundEvent POEM_NARRATION_SOUND_EVENT = SoundEvent.createVariableRangeEvent(POEM_NARRATION);
 
