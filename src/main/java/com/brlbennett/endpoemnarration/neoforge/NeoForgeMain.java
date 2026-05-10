@@ -1,14 +1,15 @@
 package com.brlbennett.endpoemnarration.neoforge;
 
-import com.brlbennett.endpoemnarration.EndPoemNarration;
+import lombok.extern.slf4j.Slf4j;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
-@Mod(value = EndPoemNarration.MOD_ID, dist = Dist.CLIENT)
+@Slf4j
+@Mod(value = "end_poem_narration", dist = Dist.CLIENT)
 public class NeoForgeMain {
     public NeoForgeMain(IEventBus modBus) {
+        log.info("Registering End Poem Narration sound.");
         PoemNarrationSound.SOUND_EVENTS.register(modBus);
     }
 }

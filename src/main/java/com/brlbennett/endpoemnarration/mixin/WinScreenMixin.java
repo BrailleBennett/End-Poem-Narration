@@ -1,12 +1,13 @@
 package com.brlbennett.endpoemnarration.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.brlbennett.endpoemnarration.EndPoemNarration;
 import lombok.extern.slf4j.Slf4j;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FormattedCharSequence;
 import org.spongepowered.asm.mixin.Final;
@@ -53,7 +54,12 @@ abstract class WinScreenMixin {
                 client.options.getSoundSourceOptionInstance(SoundSource.MUSIC).set(poemMusicVolume);
             }
             log.info("Playing the poem narration.");
-            client.level.playPlayerSound(EndPoemNarration.POEM_NARRATION_SOUND_EVENT, SoundSource.VOICE, 1f, 1f);
+            client.level.playPlayerSound(
+                    SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("end_poem_narration", "poem_narration")),
+                    SoundSource.VOICE,
+                    1f,
+                    1f
+            );
             hasPlayed = true;
             if (client.options.getSoundSourceVolume(SoundSource.VOICE) < 0.60) {
                 log.warn("Your speech/voice sound source may be to quiet too properly hear the poem narration");
