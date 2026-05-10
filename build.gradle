@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.fabricLoom)
-}
+    id "net.fabricmc.fabric-loom"
+    }
 
 version = project.mod_version
 group = project.maven_group
@@ -14,6 +14,9 @@ dependencies {
 
     implementation libs.fabricLoader
     implementation libs.fabricApi
+    compileOnly libs.neoForge
+    compileOnly libs.neoforgeFancymodloaderLoader
+
     compileOnly libs.lombok
     annotationProcessor libs.lombok
 }
