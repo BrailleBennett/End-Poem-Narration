@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+issueTrackerURL = "https://github.com/BrailleBennett/end-poem-narration/issues/"
+license = "GPL-3.0-only"
+
+[[mods]]
+modId = "end-poem-narration"
+version = "${mod_version}"
+displayName = "End Poem Narration"
+authors = "BrailleBennett"
+description = '''
+A mod that adds EnderStarr and HarrisonGray’s English human narration to the End Poem.
+'''
+modUrl = "https://modrinth.com/mod/tLv7MNQC"
+displayURL = "https://github.com/BrailleBennett/end-poem-narration/"
+
+[[dependencies.minecraft_access]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neoforge_version},)"
+
+[[dependencies.minecraft_access]]
+modId = "minecraft"
+type = "required"
+versionRange = "${neoforge_minecraft_version_range}"
+
+[[mixins]]
+config = "end-poem-narration.mixins.json"

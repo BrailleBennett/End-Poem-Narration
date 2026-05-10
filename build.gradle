@@ -25,12 +25,27 @@ processResources {
     def modVersion = project.version.toString()
     inputs.property 'version', modVersion
 
-    filesMatching("fabric.mod.json") {
-        expand([
-                "mod_version"          : modVersion,
-                "fabric_loader_version": libs.fabricLoader.get().version,
-                "minecraft_version"    : libs.minecraft.get().version
-        ])
+    def minecraftVersion = libs.minecraft.get().version
+    def minecraftVersionMatch = minecraftVersion =~ /^(\d+)\.(\d+)/
+    assert minecraftVersionMatch.find(): "Unsupported Minecraft version format: ${minecraftVersion}"
+
+    def minecraftMajorMinor = "${minecraftVersionMatch.group(1)}.${minecraftVersionMatch.group(2)}"
+    def nextMinecraftMinor = "${minecraftVersionMatch.group(1)}.${minecraftVersionMatch.group(2).toInteger() + 1}"
+
+    filesMatching('fabric.mod.json') {
+        expand(
+                mod_version: modVersion,
+                fabric_loader_version: libs.fabricLoader.get().version,
+                fabric_minecraft_version_range: "~${minecraftMajorMinor}"
+        )
+    }
+
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand(
+                mod_version: modVersion,
+                neoforge_version: libs.neoForge.get().version,
+                neoforge_minecraft_version_range: "[${minecraftMajorMinor}-,${nextMinecraftMinor})"
+        )
     }
 }
 
