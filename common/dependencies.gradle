@@ -1,4 +1,9 @@
 dependencies {
+    compileOnly "io.github.llamalad7:mixinextras-common:0.5.0"\
+
+    implementation "org.projectlombok:lombok:1.18.46"
+    annotationProcessor "org.projectlombok:lombok:1.18.46"
+
     implementation("net.blay09.mods:balm-common:${balm_version}") {
         changing = balm_version.endsWith("SNAPSHOT")
     }

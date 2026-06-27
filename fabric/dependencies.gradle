@@ -1,4 +1,7 @@
 dependencies {
+    implementation "org.projectlombok:lombok:1.18.46"
+    annotationProcessor "org.projectlombok:lombok:1.18.46"
+
     modImplementation("net.blay09.mods:balm-fabric:${balm_version}") {
         changing = balm_version.contains("SNAPSHOT")
     }
