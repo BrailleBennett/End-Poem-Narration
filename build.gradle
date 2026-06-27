@@ -1,73 +1,15 @@
 plugins {
-    id "net.fabricmc.fabric-loom"
+    id 'fabric-loom' version '1.9-SNAPSHOT' apply(false)
+    id 'net.neoforged.moddev' version '0.1.110' apply(false)
+    id 'net.darkhax.curseforgegradle' version '1.1.18' apply(false)
+    id "com.modrinth.minotaur" version "2.+" apply(false)
 }
 
-version = project.mod_version
-group = project.maven_group
-
-base {
-    archivesName = project.archives_base_name
-}
-
-dependencies {
-    minecraft libs.minecraft
-
-    implementation libs.fabricLoader
-    implementation libs.fabricApi
-
-    compileOnly libs.neoForge
-    compileOnly libs.neoforgeFancymodloaderLoader
-
-    compileOnly libs.lombok
-    annotationProcessor libs.lombok
-}
-
-processResources {
-    def modVersion = project.version.toString()
-    inputs.property 'version', modVersion
-
-    def minecraftVersion = libs.minecraft.get().version
-    def minecraftVersionMatch = minecraftVersion =~ /^(\d+)\.(\d+)/
-    assert minecraftVersionMatch.find(): "Unsupported Minecraft version format: ${minecraftVersion}"
-
-    def minecraftMajorMinor = "${minecraftVersionMatch.group(1)}.${minecraftVersionMatch.group(2)}"
-    def nextMinecraftMinor = "${minecraftVersionMatch.group(1)}.${minecraftVersionMatch.group(2).toInteger() + 1}"
-
-    filesMatching('fabric.mod.json') {
-        expand(
-                mod_version: modVersion,
-                fabric_loader_version: libs.fabricLoader.get().version,
-                fabric_minecraft_version_range: "~${minecraftMajorMinor}"
-        )
-    }
-
-    filesMatching('META-INF/neoforge.mods.toml') {
-        expand(
-                mod_version: modVersion,
-                neoforge_version: libs.neoForge.get().version,
-                neoforge_minecraft_version_range: "[${minecraftMajorMinor}-,${nextMinecraftMinor})"
-        )
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 25
-}
-
-java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
-
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
-}
-
-jar {
-    inputs.property "archivesName", project.base.archivesName
-
-    from("LICENSE") {
-        rename { "${it}_${inputs.properties.archivesName}" }
-    }
+subprojects {
+	configurations.all {
+		resolutionStrategy {
+			cacheChangingModulesFor 60, 'seconds'
+			cacheDynamicVersionsFor 60, 'seconds'
+		}
+	}
 }

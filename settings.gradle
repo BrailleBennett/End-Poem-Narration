@@ -1,55 +1,46 @@
 pluginManagement {
     repositories {
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-        mavenCentral()
         gradlePluginPortal()
-    }
-}
-
-plugins {
-    id 'com.gradle.develocity' version '4.4.3'
-    id 'net.fabricmc.fabric-loom-repositories' version '1.17-SNAPSHOT'
-}
-
-develocity {
-    buildScan {
-        publishing.onlyIf { System.getenv('CI') == 'true' }
-    }
-}
-
-dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-
-    repositories {
+        mavenCentral()
         exclusiveContent {
             forRepository {
                 maven {
                     name = 'Fabric'
-                    url = 'https://maven.fabricmc.net/'
+                    url = uri("https://maven.fabricmc.net")
                 }
             }
             filter {
-                includeGroup 'net.fabricmc'
+                includeGroup("net.fabricmc")
+                includeGroup("fabric-loom")
             }
         }
-
         exclusiveContent {
             forRepository {
                 maven {
-                    name = 'Neoforged Releases'
-                    url = 'https://maven.neoforged.net/releases/'
+                    name = 'Sponge'
+                    url = uri('https://repo.spongepowered.org/repository/maven-public')
                 }
             }
             filter {
-                includeGroupAndSubgroups 'net.neoforged'
-                includeGroupAndSubgroups 'net.minecraftforge'
-                includeGroupAndSubgroups 'cpw.mods'
+                includeGroupAndSubgroups("org.spongepowered")
             }
         }
-
-        mavenCentral()
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = 'Forge'
+                    url = uri("https://maven.minecraftforge.net")
+                }
+            }
+            filter {
+                includeGroupAndSubgroups("net.minecraftforge")
+            }
+        }
     }
 }
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+include('common', 'fabric', 'neoforge', 'forge')
