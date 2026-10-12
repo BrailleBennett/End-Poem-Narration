@@ -1,11 +1,10 @@
 # To manually find version numbers, use
 # https://linkie.shedaniel.dev/dependencies
-# https://parchmentmc.org/docs/getting-started for version table
 
 [libraries]
-fabricApi = "net.fabricmc.fabric-api:fabric-api:0.153.0+26.2"
-fabricLoader = "net.fabricmc:fabric-loader:0.19.3"
-lombok = "org.projectlombok:lombok:1.18.46"
-minecraft = "com.mojang:minecraft:26.2"
-neoForge = "net.neoforged:neoforge:26.2.0.7-beta"
-neoforgeFancymodloaderLoader = "net.neoforged.fancymodloader:loader:11.0.14"
+fabricApi = "net.fabricmc.fabric-api:fabric-api:0.162.0+26.3"
+fabricLoader = "net.fabricmc:fabric-loader:0.19.5"
+lombok = "org.projectlombok:lombok:1.18.48"
+minecraft = "com.mojang:minecraft:26.3"
+neoForge = "net.neoforged:neoforge:26.3.0.76"
+neoforgeFancymodloaderLoader = "net.neoforged.fancymodloader:loader:12.0.12"
